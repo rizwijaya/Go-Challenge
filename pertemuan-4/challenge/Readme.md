@@ -108,7 +108,7 @@ func main() {
 
 
 ```
-[*Klik untuk mengakses program golang*](https://github.com/rizwijaya/Go-Challenge/blob/master/pertemuan-4/challenge/main.go)
+[*Klik untuk mengakses program golang*](https://github.com/rizwijaya/Go-Challenge/blob/master/pertemuan-4/challenge/biodata.go)
 
 #### Hasil Saat Dijalankan
 
