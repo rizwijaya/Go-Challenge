@@ -10,7 +10,7 @@ import (
 )
 
 func printInterface(coba []interface{}, bisa []interface{}, wg *sync.WaitGroup, mu *sync.Mutex, tipe string) {
-	state := "interface1"
+	state := true
 	wg.Add(8)
 loop:
 	for i := 1; i <= 4; i++ {
@@ -19,7 +19,7 @@ loop:
 		}
 		go func(i int) {
 			defer wg.Done()
-			if state == "interface1" {
+			if i%2 == 0 {
 				fmt.Println(bisa, i)
 			} else {
 				fmt.Println(coba, i)
@@ -28,8 +28,8 @@ loop:
 				mu.Unlock()
 			}
 		}(i)
-		if i == 4 && state == "interface1" {
-			state = "interface2"
+		if i == 4 && state {
+			state = false
 			goto loop
 		}
 	}
@@ -47,6 +47,7 @@ func main() {
 	//Print Interface Rapih
 	printInterface(coba, bisa, &wg, &mu, "rapih")
 }
+
 
 
 
