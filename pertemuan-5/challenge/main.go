@@ -24,7 +24,7 @@ loop:
 				mu.Unlock()
 			}
 		}(i)
-		if i == 4 && state == "interface2" {
+		if i == 4 && state == "interface1" {
 			state = "interface2"
 			goto loop
 		}
