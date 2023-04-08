@@ -6,7 +6,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -22,8 +21,12 @@ type weather struct {
 
 // Request to API
 func request(water int, wind int) weather {
-	req := fmt.Sprintf(`{"water": %d, "wind": %d}`, water, wind)
-	resp, err := http.Post("https://jsonplaceholder.typicode.com/posts", "application/json", strings.NewReader(req))
+	req := weather{Water: water, Wind: wind}
+	b, err := json.Marshal(req)
+	if err != nil {
+		log.Println(err)
+	}
+	resp, err := http.Post("https://jsonplaceholder.typicode.com/posts", "application/json", strings.NewReader(string(b)))
 	if err != nil {
 		log.Println(err)
 	}
@@ -33,7 +36,10 @@ func request(water int, wind int) weather {
 		log.Println(err)
 	}
 	var weather weather
-	json.Unmarshal(res, &weather)
+	err = json.Unmarshal(res, &weather)
+	if err != nil {
+		log.Println(err)
+	}
 	return weather
 }
 
